@@ -1,0 +1,9 @@
+DTC: sudo /usr/local/bin/dtc -O dtb -o /home/markerwapk/AndroidStudioProjects/SmartHome/OS_script/w1-00A0.dtbo -b 0 -@ /home/markerwapk/AndroidStudioProjects/SmartHome/OS_script/w1.dts
+następnie wkopiować do /system/vendor/lib/firmware chyba że od razu z systemem.
+echo w1 > /sys/devices/bone_capemgr.9/slots
+
+startscript.sh znajduje się w /usr/bin/
+
+Wymagany program na końcu który utrzyma service przy życiu albo program nie uruchamiać jako daemon.
+
+Wymagancy g++ w wersji 4.9!
