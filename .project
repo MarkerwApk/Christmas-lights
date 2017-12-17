@@ -24,16 +24,4 @@
 		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
 		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>os</name>
-			<type>2</type>
-			<location>/home/markerwapk/Workspace/android-studio/smarthome/beagleboneblack_linux/os</location>
-		</link>
-		<link>
-			<name>src</name>
-			<type>2</type>
-			<location>/home/markerwapk/Workspace/android-studio/smarthome/beagleboneblack_linux/src</location>
-		</link>
-	</linkedResources>
 </projectDescription>
