@@ -17,7 +17,7 @@ void *SantaClausLightsManager::setWorking(bool working) {
 }
 
 void *SantaClausLightsManager::santaClausLightsThread_function(Gpio* testGpio,
-		int* offset, int* state, int*blinkStatus) {
+		int* offset, int* state) {
 
 	if (!working) {
 		*offset = 0;
@@ -70,43 +70,21 @@ void *SantaClausLightsManager::santaClausLightsThread_function(Gpio* testGpio,
 				(*offset)++;
 			else {
 				*offset = 0;
-				*state = STATE_BLINKING_ROAD_AND_START;
-			}
-
-			break;
-		}
-		case STATE_BLINKING_ROAD_AND_START: {
-			setRoadStatus(testGpio, *blinkStatus);
-			setStarsStatus(testGpio, *blinkStatus);
-
-			if ((*offset) < BLINKING_ROAD_AND_STARS_TIME) {
-				(*offset)++;
-
-				if ((*offset) % 1 == 0) {
-					*blinkStatus = std::abs((*blinkStatus) - 1);
-				}
-			} else {
-				*offset = 0;
-				*blinkStatus = 0;
-
 				*state = STATE_ROAD_OFF;
 			}
 
 			break;
 		}
+
 		case STATE_ROAD_OFF: {
 			setRoadStatus(testGpio, 0);
-			setStarsStatus(testGpio, *blinkStatus);
+			setStarsStatus(testGpio, 1);
 
 			if ((*offset) < ROAD_OFF_TIME) {
 				(*offset)++;
 
-				if ((*offset) % 1 == 0) {
-					*blinkStatus = std::abs((*blinkStatus) - 1);
-				}
 			} else {
 				*offset = 0;
-				*blinkStatus = 0;
 
 				*state = STATE_STARS_OFF;
 			}
@@ -126,17 +104,13 @@ void *SantaClausLightsManager::santaClausLightsThread_function(Gpio* testGpio,
 			break;
 		}
 		case STATE_SANTA_CLAUS_OFF: {
-			setSantaClausStatus(testGpio, *blinkStatus);
+			setSantaClausStatus(testGpio, 1);
 
 			if ((*offset) < SANTA_CLAUS_OFF_TIME) {
 				(*offset)++;
 
-				if ((*offset) % 1 == 0) {
-					*blinkStatus = std::abs((*blinkStatus) - 1);
-				}
 			} else {
 				*offset = 0;
-				*blinkStatus = 0;
 
 				*state = STATE_START;
 			}

@@ -114,6 +114,7 @@ void Serial::sendData(int test[], int len) {
 	for (unsigned int i = 0; i < len; i++) {
 		write(fd, &test[i], 1);
 	}
+	fflush(stdout);
 }
 
 int Serial::getDataCount() {

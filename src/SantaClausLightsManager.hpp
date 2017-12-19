@@ -15,7 +15,6 @@
 #define STATE_ROAD 1
 #define STATE_STARS 2
 #define STATE_ALL 3
-#define STATE_BLINKING_ROAD_AND_START 4
 #define STATE_ROAD_OFF 5
 #define STATE_STARS_OFF 6
 #define STATE_SANTA_CLAUS_OFF 7
@@ -28,9 +27,7 @@
 
 #define STARS_TIME ROAD_TIME
 
-#define ALL_TIME 3000/SANTA_CLAUS_LIGHTS_THREAD_SPEED
-
-#define BLINKING_ROAD_AND_STARS_TIME 10000/SANTA_CLAUS_LIGHTS_THREAD_SPEED
+#define ALL_TIME 15000/SANTA_CLAUS_LIGHTS_THREAD_SPEED
 
 #define ROAD_OFF_TIME ROAD_TIME
 
@@ -43,7 +40,7 @@ public:
 	SantaClausLightsManager();
 	void * setWorking(bool working);
 	void * santaClausLightsThread_function(Gpio* testGpio, int* offset,
-			int* state, int*blinkStatus);
+			int* state);
 private:
 	static bool working;
 
