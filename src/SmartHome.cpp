@@ -62,11 +62,11 @@ void SmartHome::runThread() {
 		fflush(stdout);
 		/*readThreadGpio_function();
 
-		usleep(1000 * 100);
+		 usleep(1000 * 100);
 
-		readThreadSerial_function();
+		 readThreadSerial_function();
 
-		usleep(1000 * 100); //microsecounds*/
+		 usleep(1000 * 100); //microsecounds*/
 
 		readThreadChristamsLights_function();
 
@@ -164,9 +164,9 @@ void *SmartHome::readThreadSerial_function() {
 
 	if ((count = serial->getDataCount()) > 0) {
 
-		printf("Data size > 0\n");
+		/*printf("Data size > 0\n");
 		fflush(stdout);
-
+*/
 		byte* buffer = new byte[count];
 		serial->readSerialData(buffer, count);
 
@@ -177,8 +177,10 @@ void *SmartHome::readThreadSerial_function() {
 			if (buffer[offset++] == 'l') {
 				if (buffer[offset++] == 'h') {
 					int type = buffer[offset++];
+/*
 					printf("Type %d\n", type);
 					fflush(stdout);
+*/
 
 					switch (type) {
 					case TYPE_GET_ALL_STATUS: {
@@ -220,13 +222,17 @@ void *SmartHome::readThreadSerial_function() {
 
 					case TYPE_SET_CHRISTMAS_LIGHTS_STATUS: {
 						int lightsOn = buffer[offset++];
+/*
 						printf("SET CHRISTMASS LIGHTS %d\n", lightsOn);
 						fflush(stdout);
+*/
 
 						if (Serial::checkCrc(buffer, offset)) {
 
 							christmasLightsManager->setWorking(lightsOn == 1);
 							santaClausLightsManager->setWorking(lightsOn == 1);
+							gpio->setValue(OUTPUT_CHRISTMAS_LIGHTS_2_PORT,
+									lightsOn);
 						}
 
 						break;
@@ -239,8 +245,10 @@ void *SmartHome::readThreadSerial_function() {
 	} else {
 		warningCount++;
 
+/*
 		printf("Data size == 0\n");
 		fflush(stdout);
+*/
 	}
 
 	return NULL;
@@ -257,5 +265,6 @@ int SmartHome::charToInt(char c) {
 void SmartHome::warningGpioMode() {
 	christmasLightsManager->setWorking(true);
 	santaClausLightsManager->setWorking(true);
+	gpio->setValue(OUTPUT_CHRISTMAS_LIGHTS_2_PORT, 1);
 }
 

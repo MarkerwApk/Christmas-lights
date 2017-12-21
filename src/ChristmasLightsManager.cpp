@@ -207,7 +207,7 @@ void * ChristmasLightsManager::setAllLightsStatus(Gpio* gpio, int status) {
 
 	gpio->setValue(OUTPUT_CHRISTMAS_LIGHTS_0_PORT, status);
 	gpio->setValue(OUTPUT_CHRISTMAS_LIGHTS_1_PORT, status);
-	gpio->setValue(OUTPUT_CHRISTMAS_LIGHTS_2_PORT, status);
+	//gpio->setValue(OUTPUT_CHRISTMAS_LIGHTS_2_PORT, status);
 
 	return NULL;
 }
@@ -282,10 +282,6 @@ int ChristmasLightsManager::getPortByPosition(int position) {
 	}
 	case 1: {
 		return OUTPUT_CHRISTMAS_LIGHTS_1_PORT;
-
-	}
-	case 2: {
-		return OUTPUT_CHRISTMAS_LIGHTS_2_PORT;
 
 	}
 	default:
