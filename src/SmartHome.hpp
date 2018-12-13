@@ -36,7 +36,7 @@ private:
 	Gpio* gpio;
 	OneWire* oneWire;
 	ChristmasLightsManager* christmasLightsManager;
-	SantaClausLightsManager* santaClausLightsManager;
+	//SantaClausLightsManager* santaClausLightsManager;
 
 	int warningCount;
 
