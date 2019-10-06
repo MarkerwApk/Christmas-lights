@@ -132,7 +132,6 @@ void * SantaClausLightsManager::setAllLightsStatus(Gpio* gpio, int status) {
 	fflush(stdout);
 
 	gpio->setValue(OUTPUT_CHRISTMAS_LIGHTS_SANTA_CLAUS_ROAD, status);
-	gpio->setValue(OUTPUT_CHRISTMAS_LIGHTS_SANTA_CLAUS_STARS, status);
 	gpio->setValue(OUTPUT_CHRISTMAS_LIGHTS_SANTA_CLAUS, status);
 
 	return NULL;
@@ -149,7 +148,7 @@ void * SantaClausLightsManager::setStarsStatus(Gpio* gpio, int status) {
 	//printf("Thread All status\n");
 	fflush(stdout);
 
-	gpio->setValue(OUTPUT_CHRISTMAS_LIGHTS_SANTA_CLAUS_STARS, status);
+	//gpio->setValue(OUTPUT_CHRISTMAS_LIGHTS_SANTA_CLAUS_STARS, status);
 
 	return NULL;
 }

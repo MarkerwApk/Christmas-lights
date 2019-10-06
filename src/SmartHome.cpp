@@ -228,6 +228,9 @@ void *SmartHome::readThreadSerial_function() {
 						 */
 
 						if (Serial::checkCrc(buffer, offset)) {
+							//0 wył
+							//1 tylko kule
+							//2 kule + świąteczne
 
 							christmasLightsManager->setWorking(lightsOn == 2);
 							//santaClausLightsManager->setWorking(lightsOn == 1);
@@ -239,17 +242,15 @@ void *SmartHome::readThreadSerial_function() {
 								OUTPUT_CHRISTMAS_LIGHTS_SANTA_CLAUS, 1);
 								gpio->setValue(
 								OUTPUT_CHRISTMAS_LIGHTS_SANTA_CLAUS_ROAD, 1);
-								gpio->setValue(
-								OUTPUT_CHRISTMAS_LIGHTS_SANTA_CLAUS_STARS, 1);
-							} else if (lightsOn == 1) { //TODO nie wiadomo ktory ma byc właczony
+								gpio->setValue(OUTPUT_BALL_LAMPS, 1);
+							} else if (lightsOn == 1) {
 								gpio->setValue(OUTPUT_CHRISTMAS_LIGHTS_2_PORT,
 										0);
 								gpio->setValue(
 								OUTPUT_CHRISTMAS_LIGHTS_SANTA_CLAUS, 0);
 								gpio->setValue(
 								OUTPUT_CHRISTMAS_LIGHTS_SANTA_CLAUS_ROAD, 0);
-								gpio->setValue(
-								OUTPUT_CHRISTMAS_LIGHTS_SANTA_CLAUS_STARS, 0);
+								gpio->setValue(OUTPUT_BALL_LAMPS, 1);
 							} else {
 								gpio->setValue(OUTPUT_CHRISTMAS_LIGHTS_2_PORT,
 										0);
@@ -257,8 +258,7 @@ void *SmartHome::readThreadSerial_function() {
 								OUTPUT_CHRISTMAS_LIGHTS_SANTA_CLAUS, 0);
 								gpio->setValue(
 								OUTPUT_CHRISTMAS_LIGHTS_SANTA_CLAUS_ROAD, 0);
-								gpio->setValue(
-								OUTPUT_CHRISTMAS_LIGHTS_SANTA_CLAUS_STARS, 0);
+								gpio->setValue(OUTPUT_BALL_LAMPS, 0);
 							}
 
 						}
@@ -294,7 +294,7 @@ void SmartHome::warningGpioMode() {
 	christmasLightsManager->setWorking(true);
 	gpio->setValue(OUTPUT_CHRISTMAS_LIGHTS_SANTA_CLAUS, 1);
 	gpio->setValue(OUTPUT_CHRISTMAS_LIGHTS_SANTA_CLAUS_ROAD, 1);
-	gpio->setValue(OUTPUT_CHRISTMAS_LIGHTS_SANTA_CLAUS_STARS, 1);
+	gpio->setValue(OUTPUT_BALL_LAMPS, 1);
 	//santaClausLightsManager->setWorking(true);
 	gpio->setValue(OUTPUT_CHRISTMAS_LIGHTS_2_PORT, 1);
 }
