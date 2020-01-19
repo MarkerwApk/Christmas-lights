@@ -75,9 +75,9 @@ void SmartHome::runThread() {
 		readThreadSerial_function();
 
 		usleep(1000 * 100);
-
+/*
 		printf("AfterFunction\n");
-		fflush(stdout);
+		fflush(stdout);*/
 
 	}
 }
@@ -129,7 +129,8 @@ void *SmartHome::readThreadChristamsLights_function() {
 
 	data[offset++] = TYPE_GET_CHRISTMAS_LIGHTS_STATUS;
 
-	data[offset++] = Serial::calcCrc(data, offset);
+	int crc = Serial::calcCrc(data, offset);
+	data[offset++] = crc;
 
 	serial->sendData(data, offset);
 
@@ -165,8 +166,8 @@ void *SmartHome::readThreadSerial_function() {
 	if ((count = serial->getDataCount()) > 0) {
 
 		/*printf("Data size > 0\n");
-		 fflush(stdout);
-		 */
+		fflush(stdout);*/
+
 		byte* buffer = new byte[count];
 		serial->readSerialData(buffer, count);
 
@@ -177,10 +178,9 @@ void *SmartHome::readThreadSerial_function() {
 			if (buffer[offset++] == 'l') {
 				if (buffer[offset++] == 'h') {
 					int type = buffer[offset++];
-					/*
-					 printf("Type %d\n", type);
-					 fflush(stdout);
-					 */
+
+					/*printf("Type %d\n", type);
+					fflush(stdout);*/
 
 					switch (type) {
 					case TYPE_GET_ALL_STATUS: {
@@ -273,10 +273,9 @@ void *SmartHome::readThreadSerial_function() {
 	} else {
 		warningCount++;
 
-		/*
-		 printf("Data size == 0\n");
-		 fflush(stdout);
-		 */
+		/*printf("Data size == 0 %d\n", count);
+		fflush(stdout);*/
+
 	}
 
 	return NULL;
